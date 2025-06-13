@@ -10,14 +10,11 @@ export async function generateStaticParams() {
   return params;
 }
 
-type PageProps = {
-  params: {
-    courseId: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export default async function Page({ params, searchParams }: PageProps) {
+export default async function Page({
+  params,
+}: {
+  params: { courseId: string }
+}) {
   // 服務器端日誌
   console.log('\n[Server] ====== Course Detail Page ======');
   console.log('[Server] Requested courseId:', params.courseId);
