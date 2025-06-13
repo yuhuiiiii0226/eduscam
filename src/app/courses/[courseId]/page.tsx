@@ -2,7 +2,7 @@ import { courses } from '@/data/fakeCourses';
 import { notFound } from 'next/navigation';
 import CourseDetailWrapper from './CourseDetailWrapper';
 
-type PageProps = {
+type Props = {
   params: {
     courseId: string;
   };
@@ -16,13 +16,15 @@ export async function generateStaticParams() {
   return params;
 }
 
-export default async function Page({ params }: PageProps) {
+export default function Page({ params }: Props) {
+  const courseId = params.courseId;
+  
   // 服務器端日誌
   console.log('\n[Server] ====== Course Detail Page ======');
-  console.log('[Server] Requested courseId:', params.courseId);
+  console.log('[Server] Requested courseId:', courseId);
   console.log('[Server] Available courses:', courses.map(c => ({ id: c.id, title: c.title })));
   
-  const course = courses.find(c => c.id === params.courseId);
+  const course = courses.find(c => c.id === courseId);
   
   if (course) {
     console.log('[Server] Found course:', {
@@ -31,7 +33,7 @@ export default async function Page({ params }: PageProps) {
       category: course.category
     });
   } else {
-    console.log('[Server] Course not found for ID:', params.courseId);
+    console.log('[Server] Course not found for ID:', courseId);
     notFound();
   }
 
