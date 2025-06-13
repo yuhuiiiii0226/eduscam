@@ -10,13 +10,13 @@ export async function generateStaticParams() {
   return params;
 }
 
-interface PageProps {
+type Props = {
   params: {
     courseId: string;
   };
-}
+};
 
-export default function CourseDetailPage({ params }: PageProps) {
+export default function Page({ params }: Props) {
   // 服務器端日誌
   console.log('\n[Server] ====== Course Detail Page ======');
   console.log('[Server] Requested courseId:', params.courseId);
