@@ -2,6 +2,12 @@ import { courses } from '@/data/fakeCourses';
 import { notFound } from 'next/navigation';
 import CourseDetailWrapper from './CourseDetailWrapper';
 
+type PageProps = {
+  params: {
+    courseId: string;
+  };
+};
+
 export async function generateStaticParams() {
   const params = courses.map((course) => ({
     courseId: course.id,
@@ -10,11 +16,7 @@ export async function generateStaticParams() {
   return params;
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { courseId: string }
-}) {
+export default async function Page({ params }: PageProps) {
   // 服務器端日誌
   console.log('\n[Server] ====== Course Detail Page ======');
   console.log('[Server] Requested courseId:', params.courseId);
